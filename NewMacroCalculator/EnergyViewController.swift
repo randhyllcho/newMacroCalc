@@ -8,49 +8,59 @@
 
 import UIKit
 
-class EnergyViewController: UIViewController, UITextFieldDelegate {
+class EnergyViewController: UIViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
   
   @IBOutlet weak var heightSlider: UISlider!
   @IBOutlet weak var heightLabel: UILabel!
   @IBOutlet weak var weightTextField: UITextField!
   @IBOutlet weak var energyLabel: UILabel!
   @IBOutlet weak var ageTextField: UITextField!
-  @IBOutlet weak var bedRiddenLabel: UILabel!
-  @IBOutlet weak var sedintaryLabel: UILabel!
-  @IBOutlet weak var lightActivityLabel: UILabel!
-  @IBOutlet weak var moderateLabel: UILabel!
-  @IBOutlet weak var highActivityLable: UILabel!
-  @IBOutlet weak var veryHighActivityLabel: UILabel!
+  @IBOutlet weak var usualWeightTextField: UITextField!
+  @IBOutlet weak var activityButton: UIButton!
+  @IBOutlet weak var resultsButton: UIButton!
+  @IBOutlet weak var activityPicker: UIPickerView!
+
+  
+  let activity = ["Bed Ridden", "Sedentary", "Light Activity", "Moderate Activity", "High Activity", "Very High Activity"]
   
     override func viewDidLoad() {
         super.viewDidLoad()
       self.weightTextField.delegate = self
-      self.bedRiddenLabel.alpha = 0
-      self.sedintaryLabel.alpha = 0
-      self.lightActivityLabel.alpha = 0
-      self.moderateLabel.alpha = 0
-      self.highActivityLable.alpha = 0
-      self.veryHighActivityLabel.alpha = 0
+      self.activityPicker.dataSource = self
+      self.activityPicker.delegate = self
+      self.activityPicker.alpha = 0
+      self.resultsButton.alpha = 0
+      self.energyLabel.alpha = 0
     }
+  
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
+    self.activityButton.alpha = 1
+    self.activityPicker.alpha = 0
+    self.resultsButton.alpha = 0
+  }
   
   override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
     self.weightTextField.resignFirstResponder()
     self.ageTextField.resignFirstResponder()
+    self.usualWeightTextField.resignFirstResponder()
+  }
+  
+  @IBAction func undoButton(sender: AnyObject) {
+    self.dismissViewControllerAnimated(true, completion: nil)
   }
   
   func getBMI() -> Float {
     var currentValue = round(self.heightSlider.value)
     var BMI = (((weightTextField.text as NSString).floatValue) * 703) / (currentValue * currentValue)
-    if BMI < 18.5 {
-      println("Underweight")
-    } else if BMI < 24.9 {
-      println("Normal")
-    } else if BMI < 29.9 {
-      println("Overweight")
-    } else {
-      println("Obese")
-    }
     return BMI
+  }
+  
+  func getIBW() -> Float {
+    var heightFactor = abs(round(self.heightSlider.value) - 60.0)
+    var weightAddition = 5.06 * heightFactor
+    var IBW = weightAddition + 110.0
+    return IBW
   }
   
   func restEnergyMale() -> Float{
@@ -76,186 +86,106 @@ class EnergyViewController: UIViewController, UITextFieldDelegate {
     self.heightLabel.text = "\(currentValue)\""
   }
   
-  @IBAction func maleButtonPressed(sender: AnyObject) {
+  @IBAction func activityPickerButton(sender: AnyObject) {
     var ree = (self.restEnergyMale().description as NSString).floatValue
     self.restEnergyMale()
     self.energyLabel.text = "\(ree)"
+    UIView.animateWithDuration(0.6, animations: { () -> Void in
+      self.activityPicker.alpha = 1
+      self.resultsButton.alpha = 1
+      self.activityButton.alpha = 0
+    })
+  }
+
+  func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    return self.activity.count
   }
   
-  @IBAction func femaleButtonPressed(sender: AnyObject) {
-    var ree = (self.restEnergyFemale().description as NSString).floatValue
-    self.restEnergyFemale()
-    self.energyLabel.text = "REE: \(Int(round(ree)))"
+  func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+    return self.activity[row]
   }
   
-  @IBAction func bedRiddenButton(sender: AnyObject) {
-    UIView.animateWithDuration(0.75, delay: 0.0, options: .CurveEaseOut, animations: { () -> Void in
-      self.bedRiddenLabel.alpha = 1
-    }) { (finished) -> Void in
-       UIView.animateWithDuration(0.75, delay: 3.0, options: nil, animations: { () -> Void in
-        self.bedRiddenLabel.alpha = 0
-       }, completion: { (finished) -> Void in
-        var maleREE = (self.restEnergyMale().description as NSString).floatValue
-        self.getBMI()
-        if self.getBMI() < 18.5 {
-          self.energyLabel.text = "TEE: \(maleREE * 1.2)-\(maleREE * 1.3)"
-          println("Underweight")
-        } else if self.getBMI() < 24.9 {
-          self.energyLabel.text = "TEE: \(maleREE * 1.0)-\(maleREE * 1.1)"
-          println("Normal")
-        } else if self.getBMI() < 29.9 {
-          self.energyLabel.text = "TEE: \(maleREE * 1.0)"
-          println("Overweight")
-        } else {
-          self.energyLabel.text = "TEE: \(maleREE * 1.0)"
-          println("Obese")
-        }
-      })
+  func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    //self.restEnergyMale()
+    var maleREE = (self.restEnergyMale().description as NSString).floatValue
+    if row == 0 {
+      if self.getBMI() < 18.5 {
+        self.energyLabel.text = "\(maleREE * 1.2)-\(maleREE * 1.3)"
+      } else if self.getBMI() < 24.9 {
+        self.energyLabel.text = "\(maleREE * 1.0)-\(maleREE * 1.1)"
+      } else if self.getBMI() < 29.9 {
+        self.energyLabel.text = "\(maleREE * 1.0)"
+      } else {
+        self.energyLabel.text = "\(maleREE * 1.0)"
+      }
+    } else if row == 1 {
+      if self.getBMI() < 18.5 {
+        self.energyLabel.text = "\(maleREE * 1.3)-\(maleREE * 1.4)"
+      } else if self.getBMI() < 24.9 {
+        self.energyLabel.text = "\(maleREE * 1.2)-\(maleREE * 1.3)"
+      } else if self.getBMI() < 29.9 {
+        self.energyLabel.text = "\(maleREE * 1.1)-\(maleREE * 1.2)"
+      } else {
+        self.energyLabel.text = "\(maleREE * 1.1)-\(maleREE * 1.2)"
+      }
+    } else if row == 2 {
+      if self.getBMI() < 18.5 {
+        self.energyLabel.text = "\(maleREE * 1.4)-\(maleREE * 1.5)"
+      } else if self.getBMI() < 24.9 {
+        self.energyLabel.text = "\(maleREE * 1.3)-\(maleREE * 1.4)"
+      } else if self.getBMI() < 29.9 {
+        self.energyLabel.text = "\(maleREE * 1.2)-\(maleREE * 1.3)"
+      } else {
+        self.energyLabel.text = "\(maleREE * 1.2)-\(maleREE * 1.3)"
+      }
+    } else if row == 3 {
+      if self.getBMI() < 18.5 {
+        self.energyLabel.text = "\(maleREE * 1.5)-\(maleREE * 1.6)"
+      } else if self.getBMI() < 24.9 {
+        self.energyLabel.text = "\(maleREE * 1.4)-\(maleREE * 1.5)"
+      } else if self.getBMI() < 29.9 {
+        self.energyLabel.text = "\(maleREE * 1.3)-\(maleREE * 1.4)"
+      } else {
+        self.energyLabel.text = "\(maleREE * 1.3)-\(maleREE * 1.4)"
+      }
+    } else if row == 4 {
+      if self.getBMI() < 18.5 {
+        self.energyLabel.text = "\(maleREE * 1.6)-\(maleREE * 1.8)"
+      } else if self.getBMI() < 24.9 {
+        self.energyLabel.text = "\(maleREE * 1.5)-\(maleREE * 1.6)"
+      } else if self.getBMI() < 29.9 {
+        self.energyLabel.text = "\(maleREE * 1.4)-\(maleREE * 1.5)"
+      } else {
+        self.energyLabel.text = "\(maleREE * 1.4)-\(maleREE * 1.5)"
+      }
+    } else {
+      if self.getBMI() < 18.5 {
+        self.energyLabel.text = "\(maleREE * 1.8)-\(maleREE * 2.0)"
+      } else if self.getBMI() < 24.9 {
+        self.energyLabel.text = "\(maleREE * 1.7)-\(maleREE * 2.0)"
+      } else if self.getBMI() < 29.9 {
+        self.energyLabel.text = "\(maleREE * 1.5)-\(maleREE * 1.75)"
+      } else {
+        self.energyLabel.text = "\(maleREE * 1.5)-\(maleREE * 1.75)"
+      }
     }
-  }
-  
-  @IBAction func sedentaryButton(sender: AnyObject) {
-    UIView.animateWithDuration(0.75, delay: 0.0, options: .CurveEaseOut, animations: { () -> Void in
-      self.sedintaryLabel.alpha = 1
-      }) { (finished) -> Void in
-        UIView.animateWithDuration(0.75, delay: 3.0, options: nil, animations: { () -> Void in
-          self.sedintaryLabel.alpha = 0
-          }, completion: { (finished) -> Void in
-            var maleREE = (self.restEnergyMale().description as NSString).floatValue
-            self.getBMI()
-            if self.getBMI() < 18.5 {
-              self.energyLabel.text = "TEE: \(maleREE * 1.3)-\(maleREE * 1.4)"
-              println("Underweight")
-            } else if self.getBMI() < 24.9 {
-              self.energyLabel.text = "TEE: \(maleREE * 1.2)-\(maleREE * 1.3)"
-              println("Normal")
-            } else if self.getBMI() < 29.9 {
-              self.energyLabel.text = "TEE: \(maleREE * 1.1)-\(maleREE * 1.2)"
-              println("Overweight")
-            } else {
-              self.energyLabel.text = "TEE: \(maleREE * 1.1)-\(maleREE * 1.2)"
-              println("Obese")
-            }
-        })
-
-    }
-  }
-
-  @IBAction func lightActivityButton(sender: AnyObject) {
-    UIView.animateWithDuration(0.75, delay: 0.0, options: .CurveEaseOut, animations: { () -> Void in
-      self.lightActivityLabel.alpha = 1
-      }) { (finished) -> Void in
-        UIView.animateWithDuration(0.75, delay: 5.0, options: nil, animations: { () -> Void in
-          self.lightActivityLabel.alpha = 0
-          }, completion: { (finished) -> Void in
-            var maleREE = (self.restEnergyMale().description as NSString).floatValue
-            self.getBMI()
-            if self.getBMI() < 18.5 {
-              self.energyLabel.text = "TEE: \(maleREE * 1.4)-\(maleREE * 1.5)"
-              println("Underweight")
-            } else if self.getBMI() < 24.9 {
-              self.energyLabel.text = "TEE: \(maleREE * 1.3)-\(maleREE * 1.4)"
-              println("Normal")
-            } else if self.getBMI() < 29.9 {
-              self.energyLabel.text = "TEE: \(maleREE * 1.2)-\(maleREE * 1.3)"
-              println("Overweight")
-            } else {
-              self.energyLabel.text = "TEE: \(maleREE * 1.2)-\(maleREE * 1.3)"
-              println("Obese")
-            }
-        })
-
-    }
-  }
-  
-  @IBAction func moderateButton(sender: AnyObject) {
-    UIView.animateWithDuration(0.75, delay: 0.0, options: .CurveEaseOut, animations: { () -> Void in
-      self.moderateLabel.alpha = 1
-      }) { (finished) -> Void in
-        UIView.animateWithDuration(0.75, delay: 6.0, options: nil, animations: { () -> Void in
-          self.moderateLabel.alpha = 0
-          }, completion: { (finished) -> Void in
-            var maleREE = (self.restEnergyMale().description as NSString).floatValue
-            self.getBMI()
-            if self.getBMI() < 18.5 {
-              self.energyLabel.text = "TEE: \(maleREE * 1.5)-\(maleREE * 1.6)"
-              println("Underweight")
-            } else if self.getBMI() < 24.9 {
-              self.energyLabel.text = "TEE: \(maleREE * 1.4)-\(maleREE * 1.5)"
-              println("Normal")
-            } else if self.getBMI() < 29.9 {
-              self.energyLabel.text = "TEE: \(maleREE * 1.3)-\(maleREE * 1.4)"
-              println("Overweight")
-            } else {
-              self.energyLabel.text = "TEE: \(maleREE * 1.3)-\(maleREE * 1.4)"
-              println("Obese")
-            }
-        })
-
-    }
-  }
-  
-  @IBAction func highActivityButton(sender: AnyObject) {
-    UIView.animateWithDuration(0.75, delay: 0.0, options: .CurveEaseOut, animations: { () -> Void in
-      self.highActivityLable.alpha = 1
-      }) { (finished) -> Void in
-        UIView.animateWithDuration(0.75, delay: 6.0, options: nil, animations: { () -> Void in
-          self.highActivityLable.alpha = 0
-          }, completion: { (finished) -> Void in
-            var maleREE = (self.restEnergyMale().description as NSString).floatValue
-            self.getBMI()
-            if self.getBMI() < 18.5 {
-              self.energyLabel.text = "TEE: \(maleREE * 1.6)-\(maleREE * 1.8)"
-              println("Underweight")
-            } else if self.getBMI() < 24.9 {
-              self.energyLabel.text = "TEE: \(maleREE * 1.5)-\(maleREE * 1.6)"
-              println("Normal")
-            } else if self.getBMI() < 29.9 {
-              self.energyLabel.text = "TEE: \(maleREE * 1.4)-\(maleREE * 1.5)"
-              println("Overweight")
-            } else {
-              self.energyLabel.text = "TEE: \(maleREE * 1.4)-\(maleREE * 1.5)"
-              println("Obese")
-            }
-        })
-
-    }
-  }
-  
-  @IBAction func veryHighActivityButton(sender: AnyObject) {
-    UIView.animateWithDuration(0.75, delay: 0.0, options: .CurveEaseOut, animations: { () -> Void in
-      self.veryHighActivityLabel.alpha = 1
-      }) { (finished) -> Void in
-        UIView.animateWithDuration(0.75, delay: 6.0, options: nil, animations: { () -> Void in
-          self.veryHighActivityLabel.alpha = 0
-          }, completion: { (finished) -> Void in
-            var maleREE = (self.restEnergyMale().description as NSString).floatValue
-            self.getBMI()
-            if self.getBMI() < 18.5 {
-              self.energyLabel.text = "TEE: \(maleREE * 1.8)-\(maleREE * 2.0)"
-              println("Underweight")
-            } else if self.getBMI() < 24.9 {
-              self.energyLabel.text = "TEE: \(maleREE * 1.7)-\(maleREE * 2.0)"
-              println("Normal")
-            } else if self.getBMI() < 29.9 {
-              self.energyLabel.text = "TEE: \(maleREE * 1.5)-\(maleREE * 1.75)"
-              println("Overweight")
-            } else {
-              self.energyLabel.text = "TEE: \(maleREE * 1.5)-\(maleREE * 1.75)"
-              println("Obese")
-            }
-        })
-
-    }
+    self.getIBW()
   }
 
+  func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    return 1
+  }
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if segue.identifier == "SHOW" {
       let resultVC = segue.destinationViewController as! resultsViewController
       resultVC.height = self.heightSlider.value
       resultVC.weight = self.weightTextField.text
       resultVC.age = self.ageTextField.text
+      resultVC.usualWeight = self.usualWeightTextField.text
+      resultVC.teeLow = self.energyLabel.text
+      resultVC.IBW = self.getIBW().description
+      resultVC.BMI = self.getBMI().description
+      resultVC.REE = self.restEnergyMale().description
     }
   }
-  
 }

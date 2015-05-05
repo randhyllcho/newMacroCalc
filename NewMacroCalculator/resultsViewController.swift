@@ -17,7 +17,6 @@ class resultsViewController: UIViewController {
   @IBOutlet weak var reeLabel: UILabel!
   @IBOutlet weak var bmiLabel: UILabel!
   @IBOutlet weak var teeLowLabel: UILabel!
-  @IBOutlet weak var teeHighLabel: UILabel!
   @IBOutlet weak var idealWeightLabel: UILabel!
   @IBOutlet weak var pctBodyWeightLabel: UILabel!
   @IBOutlet weak var pctUsualBodyWeight: UILabel!
@@ -27,12 +26,26 @@ class resultsViewController: UIViewController {
   var height: Float!
   var weight: String!
   var age: String!
+  var usualWeight: String!
+  var teeLow: String!
+  var IBW: String!
+  var REE: String!
+  var BMI: String!
   
     override func viewDidLoad() {
         super.viewDidLoad()
       self.heightLabel.text = "\(Int(height))\""
       self.weightLabel.text = "\(weight)lbs"
       self.ageLabel.text = "\(age)years"
+      self.usualWeightlabel.text = "Usual:\(usualWeight)lbs"
+      self.teeLowLabel.text = "\(teeLow)"
+      self.idealWeightLabel.text = "\(IBW)lbs"
+      self.lowRangeWeightLabel.text = "\((IBW as NSString).floatValue - (((IBW as NSString).floatValue) * 0.1))lbs   -"
+      self.highRangeWeightLabel.text = "\((IBW as NSString).floatValue + (((IBW as NSString).floatValue) * 0.1))lbs"
+      self.pctBodyWeightLabel.text = "\(((weight as NSString).floatValue / (IBW as NSString).floatValue) * 100)%"
+      self.pctUsualBodyWeight.text = "\(((usualWeight as NSString).floatValue / (IBW as NSString).floatValue) * 100)%"
+      self.reeLabel.text = "\(REE)"
+      self.bmiLabel.text = "\(BMI)"
     }
 
   
@@ -40,6 +53,4 @@ class resultsViewController: UIViewController {
   @IBAction func doneButtonPressed(sender: AnyObject) {
     self.dismissViewControllerAnimated(true, completion: nil)
   }
-
-
 }

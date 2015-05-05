@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		320634571AF85856005D44CE /* boy-and-girl-stick-figure-red-hi.png in Resources */ = {isa = PBXBuildFile; fileRef = 320634561AF85856005D44CE /* boy-and-girl-stick-figure-red-hi.png */; };
 		327733711AE1B2F0004B372C /* resultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327733701AE1B2F0004B372C /* resultsViewController.swift */; };
 		32E7E2501ADF0DF5003991D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E7E24F1ADF0DF5003991D1 /* AppDelegate.swift */; };
 		32E7E2531ADF0DF5003991D1 /* NewMacroCalculator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 32E7E2511ADF0DF5003991D1 /* NewMacroCalculator.xcdatamodeld */; };
@@ -30,6 +31,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		320634561AF85856005D44CE /* boy-and-girl-stick-figure-red-hi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "boy-and-girl-stick-figure-red-hi.png"; sourceTree = "<group>"; };
 		327733701AE1B2F0004B372C /* resultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = resultsViewController.swift; sourceTree = "<group>"; };
 		32E7E24A1ADF0DF5003991D1 /* NewMacroCalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewMacroCalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32E7E24E1ADF0DF5003991D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 				32E7E2741AE07774003991D1 /* Client.swift */,
 				32E7E2591ADF0DF5003991D1 /* Images.xcassets */,
 				32E7E2761AE08D99003991D1 /* activeMan.png */,
+				320634561AF85856005D44CE /* boy-and-girl-stick-figure-red-hi.png */,
 				32E7E25B1ADF0DF5003991D1 /* LaunchScreen.xib */,
 				32E7E2511ADF0DF5003991D1 /* NewMacroCalculator.xcdatamodeld */,
 				32E7E24D1ADF0DF5003991D1 /* Supporting Files */,
@@ -205,6 +208,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				32E7E2771AE08D99003991D1 /* activeMan.png in Resources */,
+				320634571AF85856005D44CE /* boy-and-girl-stick-figure-red-hi.png in Resources */,
 				32E7E2581ADF0DF5003991D1 /* Main.storyboard in Resources */,
 				32E7E25D1ADF0DF5003991D1 /* LaunchScreen.xib in Resources */,
 				32E7E25A1ADF0DF5003991D1 /* Images.xcassets in Resources */,
