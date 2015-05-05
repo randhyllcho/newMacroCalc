@@ -20,7 +20,6 @@ class EnergyViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
   @IBOutlet weak var resultsButton: UIButton!
   @IBOutlet weak var activityPicker: UIPickerView!
 
-  
   let activity = ["Bed Ridden", "Sedentary", "Light Activity", "Moderate Activity", "High Activity", "Very High Activity"]
   
     override func viewDidLoad() {
@@ -58,14 +57,14 @@ class EnergyViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
   
   func getIBW() -> Float {
     var heightFactor = abs(round(self.heightSlider.value) - 60.0)
-    var weightAddition = 5.06 * heightFactor
-    var IBW = weightAddition + 110.0
+    var weightAddition = 6.0 * heightFactor
+    var IBW = weightAddition + 106.0
     return IBW
   }
   
   func restEnergyMale() -> Float{
     var currentValue = round(self.heightSlider.value)
-    var heightInCM = currentValue * 2.5
+    var heightInCM = currentValue * 2.54
     var weightInKG = (self.weightTextField.text as NSString).floatValue / 2.2
     var age = (self.ageTextField.text as NSString).floatValue
     var restEnergyEstimate = (10 * weightInKG) + (6.25 * heightInCM) - (5 * age) + 5

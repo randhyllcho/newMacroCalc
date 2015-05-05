@@ -21,7 +21,6 @@
 		32E7E25D1ADF0DF5003991D1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32E7E25B1ADF0DF5003991D1 /* LaunchScreen.xib */; };
 		32E7E2691ADF0DF5003991D1 /* NewMacroCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E7E2681ADF0DF5003991D1 /* NewMacroCalculatorTests.swift */; };
 		32E7E2731AE0682E003991D1 /* EnergyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E7E2721AE0682E003991D1 /* EnergyViewController.swift */; };
-		32E7E2751AE07774003991D1 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E7E2741AE07774003991D1 /* Client.swift */; };
 		32E7E2771AE08D99003991D1 /* activeMan.png in Resources */ = {isa = PBXBuildFile; fileRef = 32E7E2761AE08D99003991D1 /* activeMan.png */; };
 /* End PBXBuildFile section */
 
@@ -54,7 +53,6 @@
 		32E7E2671ADF0DF5003991D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		32E7E2681ADF0DF5003991D1 /* NewMacroCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMacroCalculatorTests.swift; sourceTree = "<group>"; };
 		32E7E2721AE0682E003991D1 /* EnergyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnergyViewController.swift; sourceTree = "<group>"; };
-		32E7E2741AE07774003991D1 /* Client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		32E7E2761AE08D99003991D1 /* activeMan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = activeMan.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,7 +100,6 @@
 				320634581AF86037005D44CE /* FemaleEnergyViewController.swift */,
 				327733701AE1B2F0004B372C /* resultsViewController.swift */,
 				32E7E2561ADF0DF5003991D1 /* Main.storyboard */,
-				32E7E2741AE07774003991D1 /* Client.swift */,
 				32E7E2591ADF0DF5003991D1 /* Images.xcassets */,
 				320634661AF87198005D44CE /* bigAssBurger.png */,
 				320634681AF87200005D44CE /* bigAssBurger 2.png */,
@@ -191,6 +188,7 @@
 				TargetAttributes = {
 					32E7E2491ADF0DF5003991D1 = {
 						CreatedOnToolsVersion = 6.3;
+						DevelopmentTeam = 3H6D2LJDAK;
 					};
 					32E7E2611ADF0DF5003991D1 = {
 						CreatedOnToolsVersion = 6.3;
@@ -252,7 +250,6 @@
 				327733711AE1B2F0004B372C /* resultsViewController.swift in Sources */,
 				32E7E2501ADF0DF5003991D1 /* AppDelegate.swift in Sources */,
 				32E7E2731AE0682E003991D1 /* EnergyViewController.swift in Sources */,
-				32E7E2751AE07774003991D1 /* Client.swift in Sources */,
 				32E7E2531ADF0DF5003991D1 /* NewMacroCalculator.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -382,9 +379,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = NewMacroCalculator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -392,9 +392,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = NewMacroCalculator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

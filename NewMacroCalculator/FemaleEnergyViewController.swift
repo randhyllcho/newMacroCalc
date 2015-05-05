@@ -53,7 +53,7 @@ class FemaleEnergyViewController: UIViewController, UITextFieldDelegate, UIPicke
 
   func restEnergyFemale() -> Float{
     var currentValue = round(self.heightSlider.value)
-    var heightInCM = currentValue * 2.5
+    var heightInCM = currentValue * 2.54
     var weightInKG = (self.weightTextField.text as NSString).floatValue / 2.2
     var age = (self.ageTextField.text as NSString).floatValue
     var restEnergyEstimate = (10 * weightInKG) + (6.25 * heightInCM) - (5 * age) - 161
@@ -68,8 +68,8 @@ class FemaleEnergyViewController: UIViewController, UITextFieldDelegate, UIPicke
   
   func getIBW() -> Float {
     var heightFactor = abs(round(self.heightSlider.value) - 60.0)
-    var weightAddition = 5.06 * heightFactor
-    var IBW = weightAddition + 99.0
+    var weightAddition = 5.0 * heightFactor
+    var IBW = weightAddition + 100.0
     return IBW
   }
   
