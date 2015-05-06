@@ -70,6 +70,10 @@ class FemaleEnergyViewController: UIViewController, UITextFieldDelegate, UIPicke
     var heightFactor = abs(round(self.heightSlider.value) - 60.0)
     var weightAddition = 5.0 * heightFactor
     var IBW = weightAddition + 100.0
+    if round(self.heightSlider.value) < 60 {
+      var IBW = 100 - weightAddition
+      return IBW
+    }
     return IBW
   }
   

@@ -19,7 +19,7 @@ class EnergyViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
   @IBOutlet weak var activityButton: UIButton!
   @IBOutlet weak var resultsButton: UIButton!
   @IBOutlet weak var activityPicker: UIPickerView!
-
+  
   let activity = ["Bed Ridden", "Sedentary", "Light Activity", "Moderate Activity", "High Activity", "Very High Activity"]
   
     override func viewDidLoad() {
@@ -30,6 +30,13 @@ class EnergyViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
       self.activityPicker.alpha = 0
       self.resultsButton.alpha = 0
       self.energyLabel.alpha = 0
+//      self.heightSlider.layer.shadowColor = UIColor.blackColor().CGColor
+//      self.heightSlider.layer.shadowOffset = CGSizeMake(0, 5)
+//      self.heightSlider.layer.shadowOpacity = 0.4
+//      self.activityPicker.layer.shadowColor = UIColor.blackColor().CGColor
+//      self.activityPicker.layer.shadowOffset = CGSizeMake(0, 5)
+//      self.activityPicker.layer.shadowOpacity = 0.4
+      
     }
   
   override func viewWillAppear(animated: Bool) {
@@ -82,9 +89,9 @@ class EnergyViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
     self.restEnergyMale()
     self.energyLabel.text = "\(ree)"
     UIView.animateWithDuration(0.6, animations: { () -> Void in
+      self.activityButton.alpha = 0
       self.activityPicker.alpha = 1
       self.resultsButton.alpha = 1
-      self.activityButton.alpha = 0
     })
   }
 

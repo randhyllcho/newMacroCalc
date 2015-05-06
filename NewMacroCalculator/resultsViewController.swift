@@ -26,6 +26,7 @@ class resultsViewController: UIViewController {
   @IBOutlet weak var heightInCMLabel: UILabel!
   @IBOutlet weak var weightInKGLabel: UILabel!
   
+  var numberFormater: NSNumberFormatter!
   var height: Float!
   var weight: String!
   var age: String!
@@ -43,15 +44,15 @@ class resultsViewController: UIViewController {
       self.usualWeightlabel.text = "Usual:\(usualWeight)lbs"
       self.teeLowLabel.text = "\(teeLow)"
       self.idealWeightLabel.text = "\(IBW)lbs"
-      self.lowRangeWeightLabel.text = "\((IBW as NSString).floatValue - (((IBW as NSString).floatValue) * 0.1))lbs   -"
+      self.lowRangeWeightLabel.text = "\((IBW as NSString).floatValue - (((IBW as NSString).floatValue) * 0.1))lbs  -"
       self.highRangeWeightLabel.text = "\((IBW as NSString).floatValue + (((IBW as NSString).floatValue) * 0.1))lbs"
-      self.pctBodyWeightLabel.text = "\(((weight as NSString).floatValue / (IBW as NSString).floatValue) * 100)%"
-      self.pctUsualBodyWeight.text = "\(((weight as NSString).floatValue / (usualWeight as NSString).floatValue) * 100)%"
-      self.pctChange.text = "\(round(((((weight as NSString).floatValue) - (usualWeight as NSString).floatValue) / (usualWeight as NSString).floatValue) * 100))%"
-      self.heightInCMLabel.text = "\(round(height * 2.54))cm"
-      self.weightInKGLabel.text = "\(round((weight as NSString).floatValue / 2.2))kg"
-      self.reeLabel.text = "\(REE)"
-      self.bmiLabel.text = "\(BMI)"
+      self.pctBodyWeightLabel.text = "\(NumberFormatter.sharedInstance.stringFromNumber(((weight as NSString).floatValue / (IBW as NSString).floatValue) * 100)!)%"
+      self.pctUsualBodyWeight.text = "\(NumberFormatter.sharedInstance.stringFromNumber(((weight as NSString).floatValue / (usualWeight as NSString).floatValue) * 100)!)%"
+      self.pctChange.text = "\(NumberFormatter.sharedInstance.stringFromNumber(((((weight as NSString).floatValue) - (usualWeight as NSString).floatValue) / (usualWeight as NSString).floatValue) * 100)!)%"
+      self.heightInCMLabel.text = "\(NumberFormatter.sharedInstance.stringFromNumber(height * 2.54)!)cm"
+      self.weightInKGLabel.text = "\(NumberFormatter.sharedInstance.stringFromNumber((weight as NSString).floatValue / 2.2)!)kg"
+      self.reeLabel.text = "\(NumberFormatter.sharedInstance.stringFromNumber(((REE as NSString).floatValue))!)"
+      self.bmiLabel.text = "\(NumberFormatter.sharedInstance.stringFromNumber(((BMI as NSString).floatValue))!)"
     }
 
   

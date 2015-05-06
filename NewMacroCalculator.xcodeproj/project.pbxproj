@@ -13,6 +13,7 @@
 		3206345D1AF86C3B005D44CE /* forkImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3206345C1AF86C3B005D44CE /* forkImage.jpg */; };
 		320634671AF87198005D44CE /* bigAssBurger.png in Resources */ = {isa = PBXBuildFile; fileRef = 320634661AF87198005D44CE /* bigAssBurger.png */; };
 		320634691AF87200005D44CE /* bigAssBurger 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 320634681AF87200005D44CE /* bigAssBurger 2.png */; };
+		3230C2E71AF945F20099C638 /* NumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3230C2E61AF945F20099C638 /* NumberFormatter.swift */; };
 		327733711AE1B2F0004B372C /* resultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327733701AE1B2F0004B372C /* resultsViewController.swift */; };
 		32E7E2501ADF0DF5003991D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E7E24F1ADF0DF5003991D1 /* AppDelegate.swift */; };
 		32E7E2531ADF0DF5003991D1 /* NewMacroCalculator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 32E7E2511ADF0DF5003991D1 /* NewMacroCalculator.xcdatamodeld */; };
@@ -41,6 +42,7 @@
 		3206345C1AF86C3B005D44CE /* forkImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = forkImage.jpg; sourceTree = "<group>"; };
 		320634661AF87198005D44CE /* bigAssBurger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bigAssBurger.png; sourceTree = "<group>"; };
 		320634681AF87200005D44CE /* bigAssBurger 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bigAssBurger 2.png"; sourceTree = "<group>"; };
+		3230C2E61AF945F20099C638 /* NumberFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberFormatter.swift; sourceTree = "<group>"; };
 		327733701AE1B2F0004B372C /* resultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = resultsViewController.swift; sourceTree = "<group>"; };
 		32E7E24A1ADF0DF5003991D1 /* NewMacroCalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewMacroCalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32E7E24E1ADF0DF5003991D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 				32E7E2721AE0682E003991D1 /* EnergyViewController.swift */,
 				320634581AF86037005D44CE /* FemaleEnergyViewController.swift */,
 				327733701AE1B2F0004B372C /* resultsViewController.swift */,
+				3230C2E61AF945F20099C638 /* NumberFormatter.swift */,
 				32E7E2561ADF0DF5003991D1 /* Main.storyboard */,
 				32E7E2591ADF0DF5003991D1 /* Images.xcassets */,
 				320634661AF87198005D44CE /* bigAssBurger.png */,
@@ -247,6 +250,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				320634591AF86037005D44CE /* FemaleEnergyViewController.swift in Sources */,
+				3230C2E71AF945F20099C638 /* NumberFormatter.swift in Sources */,
 				327733711AE1B2F0004B372C /* resultsViewController.swift in Sources */,
 				32E7E2501ADF0DF5003991D1 /* AppDelegate.swift in Sources */,
 				32E7E2731AE0682E003991D1 /* EnergyViewController.swift in Sources */,
